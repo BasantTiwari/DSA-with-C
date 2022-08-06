@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+
+    int n;
+    printf("Enter the size of the array\n");
+    scanf("%d",&n);
+    int a[n];
+    printf("Enter the values\n");
+    for(int i=0; i<n; i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    int lb=0;
+    int ub=n-1;
+    printf("The Original Array\n");
+
+    for(int i=0; i<n; i++)
+    {
+        printf("%d ",a[i]);
+    }
+    printf("\nThe sorted array by the Merge sort technique\n");
+    merge_sort(a,lb,ub);
+    for(int i=0;i<n;i++)
+    {
+    printf("%d ",a[i]);
+    }
+
+}
+
+void merge_sort(int a[],int lb,int ub)
+{
+
+    if(lb<ub)
+    {
+        int mid=(lb+ub)/2;
+        merge_sort(a,lb,mid);
+        merge_sort(a,mid+1,ub);
+        merge(a,lb,mid,ub);
+    }
+}
+void merge(int a[],int lb,int mid,int ub)
+{
+    int n1[mid];
+    int n2[ub-mid];
+    for(int i=0;i<mid;i++)
+    {
+        n1[i]=a[i];
+
+    }
+    for(int j=0;j<ub-mid;j++)
+    {
+        n2[j]=a[mid+1+j];
+
+    }
+    int i=lb;
+    int j=mid;
+    int k=lb;
+    int b[lb+ub];
+
+    while(i<n1 && j<n2)
+    {
+        if(n1[i]<n2[j])
+        {
+            b[k]=n1[i];
+            i++;
+        }
+        else
+        {
+            b[k]=n2[j];
+            j++;
+        }
+        k++;
+
+    }
+    if(i>mid)
+    {
+        while(j<=ub)
+        {
+            b[k]=a[j];
+            j++;
+            k++;
+        }
+    }
+    else
+    {
+        while(i<=mid)
+        {
+            b[k]=a[i];
+            i++;
+            k++;
+        }
+
+    }
+    for(k=0; k<(lb+ub); k++)
+    {
+        a[k]=b[k];
+    }
+}

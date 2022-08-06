@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+int info;
+struct node *next;
+}node;
+node rightadd(node,node,int);
+node leftside(node,node,int);
+node specific(node,node,int);
+//void display()
+
+int main()
+{
+int x,ch;
+node *p=NULL,*head=NULL,*temp=NULL,*prevnode=NULL;
+while(ch)
+{
+printf("\nTo add at right side-press 1\nTo add at left side of node-press 2\nto any specific position-press 3\nto Display Nodes press 4\nto exit press 0\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:p=(node*)malloc(sizeof(node));
+       printf("Enter the element\n");
+       scanf("%d",&x);
+       head=rightadd(*head,*temp,x);
+       break;
+case 2:p=(node*)malloc(sizeof(node));
+       printf("Enter the element\n");
+       scanf("%d",&x);
+       temp=leftside(*node head,*node temp,int x);
+       break;
+case 3:
+case 4:display(*node head,*node temp)
+       break;
+}
+
+}
+
+}
+node * rightadd(*node head,*node temp,int x)
+{
+if(head==NULL && temp==NULL)
+{
+p->info=x;
+head=temp=p;
+}
+else
+{
+p->info=x;
+temp->next=p;
+temp=p;
+}
+temp->next=NULL;
+return(head);
+}
+
+

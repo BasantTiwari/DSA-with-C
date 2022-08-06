@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define n 5
+int enque(int,int[]);
+int deque(int,int,int[]);
+void display(int,int,int[]);
+int main()
+{
+    int front=-1,rear=-1,ch;
+    int a[n];
+    while(ch!=0)
+    {
+    printf("to add the element: press 1\n");
+    printf("to remove the elements: press 2\n");
+    printf("to display the elements:press 3\n");
+    printf("to exit the program: press 0\n");
+    scanf("%d",&ch);
+    if(ch==1)
+    rear=enque(rear,a);
+    if(front==-1)
+    front=0;
+    else if(ch==2)
+    front=deque(front,rear,a);
+    if(front==-1)
+    rear=-1;
+    else if(ch==3)
+    display(rear,front,a);
+    //printf("\npress 1 to continue\npress 0 to stop\n");
+    //scanf("%d",&ch2);
+        
+    }
+}
+
+int enque(int rear,int a[])
+{
+    if(rear==n-1)
+        printf("Overflow Condition\n");
+    else
+    {
+        rear++;
+        scanf("%d",&a[rear]);
+    }
+    return rear;
+}
+int deque(int front,int rear,int a[])
+{
+    if(front==-1 && rear==-1)
+    printf("Underflow condition: Queue is empty\n");
+    else if(front==rear)
+    {
+        printf("The removed element is %d",a[front]);
+        front=-1;
+    }
+    else
+    {
+        printf("The removed element is %d",a[front]);
+        front++;
+    }
+    return front;
+}
+void  display(int rear,int front,int a[])
+{
+    if(front==-1 && rear==-1)
+    printf("Undeflow condition :Nothing to display\n");
+    else
+    {
+       for(int i=front;i<=rear;i++)
+       {
+           printf("%d ",a[i]);
+       }
+    }
+    
+}

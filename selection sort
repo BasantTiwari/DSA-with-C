@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int size,i;
+    printf("Enter the size of array:\n");
+    scanf("%d",&size);
+    int arr[size];
+    printf("Enter the elements:\n");
+    for(i=0; i<size; i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    selection_sort(arr,size);
+    printf("The sorted array by selection method:\n");
+    for(i=0; i<size; i++)
+    {
+        printf("%d ",arr[i]);
+    }
+}
+void selection_sort(int arr[],int size)
+{
+    int small=0,pos;
+    for(int i=0; i<size-1; i++)
+    {
+        small=arr[i];
+         pos=i;
+        for(int j=i+1; j<size; j++)
+        {
+            if(arr[j]<small)
+            {
+                small=arr[j];
+                pos=j;
+            }
+        }
+        if(pos!=i)
+        {
+            arr[pos]=arr[i];
+            arr[i]=small;
+        }
+    }
+}

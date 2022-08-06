@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int info;
+    struct node *next;
+} node;
+void insert(node**,node**,int);
+void display(node**,node**);
+void displayalternative(node**);
+void main()
+{
+    int x,ch;
+    node *head=NULL,*tail=NULL;
+    while(ch!=0)
+    {
+        printf("\ninsert  the node: press 1\n");
+        printf("Display the node: press 2\n");
+        printf("Display the alternative node: press 3\n");
+        printf("To exit: press 0\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+        case 1:
+            printf("Enter the element\n");
+            scanf("%d",&x);
+            insert(&head,&tail,x);
+            break;
+        case 2:
+            display(&head,&tail);
+            break;
+        case 3:
+            displayalternative(&head);
+            break;
+        }
+    }
+}
+void insert(node **head,node **tail,int x)
+{
+    node *p;
+    p=(node*)malloc(sizeof(node));
+//count++;
+    p->info=x;
+    if(*head==NULL && *tail==NULL)
+    {
+        *head=*tail=p;
+
+    }
+    else
+    {
+        (*tail)->next=p;
+        *tail=(*tail)->next;
+    }
+    (*tail)->next=NULL;
+}
+void display(node **head,node **tail)
+{
+    node *temp;
+    temp=*head;
+    while(temp!=0)
+    {
+        printf("%d ",temp->info);
+        temp=temp->next;
+    }
+}
+void displayalternative(node** head)
+{
+    int ch2;
+    printf("if want to display odd nodes: press 1\n");
+    printf("if want to display the even nodes: press 2\n");
+    scanf("%d",&ch2);
+    node* temp;
+    int count=1;
+    switch(ch2)
+    {
+    case 1:
+
+        temp=*head;
+        //int count=1;
+        while(temp!=NULL)
+        {
+            if(count%2==1)
+            {
+                printf("%d ",temp->info);
+
+            }
+
+            count++;
+            temp=temp->next;
+        }
+        break;
+    case 2:
+        //node* temp=NULL;
+        temp=*head;
+        //int count=1;
+        while(temp!=NULL)
+        {
+            if(count%2==0)
+            {
+                printf("%d ",temp->info);
+
+            }
+            count++;
+            temp=temp->next;
+        }
+        break;
+    }
+}
+

@@ -1,0 +1,145 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+int info;
+struct node *next;
+}node;
+int main()
+{
+int x,ch;
+node *p=NULL,*head=NULL,*temp=NULL;
+while(ch!=0)
+{
+printf("\nTo add the node at right side: press 1\n");
+printf("To add node at left side: press 2\n");
+printf("To delete the node from right side: press 3\n");
+printf("To delete the node from left side: press 4\n");
+printf("To display the nodes: press 5\n");
+printf("To exit: press 0\n");
+scanf("%d",&ch);
+
+switch(ch)
+{
+case 1: printf("Enter the info part: ");
+        scanf("%d",&x);
+        p=(node*)malloc(sizeof(node));
+        p->info=x;
+        if(head==NULL && temp==NULL)
+        {
+        head=temp=p;
+        temp->next=head;
+        }
+        else
+        {
+        temp->next=p;
+        temp=p;
+        temp->next=head;
+        }
+        break;
+case 2: printf("Enter the info part: ");
+        scanf("%d",&x);
+        p=(node*)malloc(sizeof(node));
+        p->info=x;
+        if(head==NULL && temp==NULL)
+        {
+        head=temp=p;
+        temp->next=head;
+        }
+        else if(head==temp)
+        {
+        head=p;
+        temp->next=head;
+        head->next=temp;
+        }
+        else
+        {
+        p->next=head;
+        head=p;
+        temp->next=head;
+        }
+        break;
+case 3: if(head==NULL && temp==NULL)
+        printf("The List is empty Nothing to delete\n");
+        else if(head==temp)
+        {
+        printf("The deleted elemeent is %d\n",temp->info);
+        head=temp=NULL;
+        }
+        else
+        {
+        node *prev;
+        temp=head;
+        while(temp->next!=head)
+        {
+
+        prev=temp;
+        temp=temp->next;
+
+        if(temp->next==head)
+        {
+        printf("The removed element is %d\n",temp->info);
+        prev->next=head;
+        //free(temp);
+        }
+
+
+        }
+        }
+        break;
+case 4: if(head==NULL && temp==NULL)
+        printf("List is Empty nothing to delete \n");
+        else if(head==temp)
+        {
+        printf("The removed element is %d",temp->info);
+        head=temp=NULL;
+        }
+        else
+        {
+        /*temp=head;
+        while(temp->next!=head)
+        {
+        temp=temp->next;
+        if(temp->next==head)
+        {
+        printf("The removed element is %d\n",head->info);
+        head=head->next;
+        temp->next=head;
+        break;
+        }
+
+        }*/
+        printf("The removed element is %d\n",head->info);
+        head=head->next;
+        temp->next=head;
+        break;
+        }
+case 5: temp=head;
+        if(head==NULL && temp==NULL)
+        printf("Nothing to display\n");
+        else
+        {
+        printf("%d ",temp->info);
+        while(temp->next!=head)
+         {
+         temp=temp->next;
+         printf("%d ",temp->info);
+         }
+        }
+         break;
+}
+
+ }
+
+
+
+
+
+
+
+
+
+
+}
+
+

@@ -1,0 +1,96 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+int coficient;
+int power;
+struct node *next;
+}node;
+node *create(void);
+void display(node*);
+node* add(void);
+
+
+int main()
+{
+int ch,ch2;//cf,pow;
+node *polynomial_1=NULL, *polynomial_2=NULL;
+
+while(1)
+{
+printf("\nTo create the list : Press 1\n");
+printf("To display list 1 and list 2: Press 2\n");
+printf("To add both the list: Press 4\n");
+printf("To display the list of sum: Press 5\n");
+printf("To Exit: Press 0\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+        printf("Enter value of polynomial 1\n");
+        polynomial_1=create();
+        printf("Enter value of polynomial 2\n");
+        polynomial_2=create();
+        break;
+case 2: printf("First polynomial is \n");
+
+        display(polynomial_1);
+        printf("Second polynomial is\n");
+        display(polynomial_2);
+        break;
+case 3:
+
+}
+}
+}
+node *create(void)
+{
+        int cf,pow,ch=1;
+        node *head=NULL,*tail=NULL;
+       do{ node *p;
+        p=(node*)malloc(sizeof(node));
+        printf("Enter the coficient\n");
+        scanf("%d",&cf);
+        printf("Enter the power\n");
+        scanf("%d",&pow);
+        p->coficient=cf;
+        p->power=pow;
+        if(head==NULL)
+        {
+        head=tail=p;
+
+        }
+        else
+        {
+
+        tail->next=p;
+        tail=p;
+
+        }
+
+        tail->next=NULL;
+        printf("Want to continue : press 1\n");
+        printf("To exit: Press 0\n");
+        scanf("%d",&ch);
+       }while(ch!=0);
+        return head;
+}
+void display(node *head)
+{
+if(head==NULL)
+{
+printf("The list is empty\n");
+}
+else
+{
+
+while(head!=0)
+{
+printf("%d x^%d\t",head->coficient,head->power);
+head=head->next;
+}
+}
+}
+void add()
+
+

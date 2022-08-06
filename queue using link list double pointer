@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int info;
+    struct node *next;
+}node;
+
+void enque(node **rear,node **front,int x)
+{
+    node *p=NULL;
+
+    p=(node*)malloc(sizeof(node));
+    p->info=x;
+    if(*front==NULL && *rear==NULL)
+
+        *front=*rear=p;
+    else
+    {
+        (*rear)->next=p;
+        *rear=p;
+    }
+    (*rear)->next=NULL;
+
+}
+void deque(node **front)
+{
+
+    node *temp=NULL;
+    printf("The dequeued element is %d",(*front)->info);
+    temp=*front;
+    *front=(*front)->next;
+    free(temp);
+
+
+}
+void display(node *front)
+{
+    while(front!=NULL)
+    {
+        printf("-->%d",(front)->info);
+        front=front->next;
+    }
+}
+void main()
+{
+    node *front=NULL,*rear=NULL;
+    int x,ch;
+    while(1)
+    {
+        printf("To Enter element to Queue- press 1\n");
+        printf("To remove element from Queue-press 2\n");
+        printf("to display element-press 3\n");
+        printf("to exit - press 0\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:printf("Enter the element\n");
+                   scanf("%d",&x);
+                   enque(&front,&rear,x);
+                   break;
+            case 2:if(front==NULL && rear==NULL)
+                    printf("The Queue is Empty\n");
+                    else
+                    {
+                        deque(&front);
+                    }
+                    break;
+            case 3:if(front==NULL && rear==NULL)
+                    printf("The Queue is Empty\n");
+                    else
+                    {
+                        display(front);
+                    }
+                    break;
+        }
+    }
+}

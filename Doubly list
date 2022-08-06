@@ -1,0 +1,126 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+struct node *prev;
+int info;
+struct node *next
+}node;
+void insert(node **,node**);
+//void delet(node**,node**);
+void display(node*);
+void main()
+{
+int ch,key;
+node *head=NULL,*temp=NULL,*p=NULL;
+do
+{
+printf("\nTO enter the node: press 1\n");
+printf("To delete the node by key: press 2\n");
+printf("To display the  list: press 3\n");
+printf("To exit the program: press 4\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+        insert(&head,&temp);
+        break;
+//case 2: printf("Enter the key you want to delete:\n");
+        scanf("%d",&key);
+        delet(&head,&temp);
+        break;
+case 3: display(&head);
+        break;
+
+
+}
+}while(ch!=4);
+}
+void insert(node**head,node**temp)
+            {
+            int x;
+            node*p;
+            printf("Enter the element:\n");
+            scanf("%d",&x);
+            p=(node*)malloc(sizeof(node));
+            if(*head==NULL && *temp==NULL)
+            {
+            *head=p;
+            *temp=p;
+            (*temp)->prev=NULL;
+            (*temp)->next=NULL;
+            }
+            else if(*head==*temp)
+            {
+            if(x>(*temp)->info)
+            {
+            p->info=x;
+            (*temp)->next=p;
+            p->next=NULL;
+            p->prev=*temp;
+            *temp=(*temp)->next;
+            }
+            else
+            {
+            p->info=x;
+            *head=p;
+            (*head)->prev=NULL;
+            p->next=*temp;
+            (*temp)->prev=p;
+            (*temp)->next=NULL;
+
+            }
+            }
+            else
+            {
+            if(x>(*temp)->info)
+            {
+            p->info=x;
+            (*temp)->next=p;
+            p->prev=*temp;
+            *temp=p;
+            (*temp)->next=NULL;
+            }
+            //else if()
+            else
+            {
+            while(*temp!=0)
+            {
+                if((*temp)->info<x)
+                {
+                    p->info=x;
+                    ((*temp)->next)->prev=p;
+                    p->next=(*temp)->next;
+                    (*temp)->next=p;
+                    p->prev=*temp;
+
+                }
+                *temp=(*temp)->prev;
+            /*if(((*temp)->info)>((*temp)->prev)->info)
+            {
+            p->info=x;
+            p->next=*temp;
+            ((*temp)->prev)->next=p;
+            p->prev=((*temp)->prev);
+            ((*temp)->prev)=p;
+            }
+            *temp=(*temp)->prev;
+            }*/
+            }
+            }
+            }
+ void display(node*head)
+ {
+     node*temp=head;
+     //temp=head;
+     while(temp!=0)
+     {
+         printf("%d ",temp->info);
+         temp=temp->next;
+
+     }
+}
+
+
+
+

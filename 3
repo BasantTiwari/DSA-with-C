@@ -1,0 +1,130 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+struct node *prev;
+int info;
+struct node *next;
+}node;
+void main()
+{
+int x,ch;
+node *head=NULL,*temp=NULL,*tail=NULL;
+while(ch!=0)
+{
+printf("Want to display the list in ascending order:  press 1\n");
+printf("Want to display the list in decending order:  press 2\n");
+printf("Want to continue adding nodes: press 3\n");
+printf("Want to stop adding nodes: press 0\n");
+scanf("%d",&ch);
+switch(ch)
+{
+ case 1:    printf("The Link list in the ascending order\n");
+            if(head==NULL && tail==NULL)
+            {
+                printf("The list is empty\n");
+
+            }
+            else if(head==tail)
+            {
+                printf("The only element in the list is %d",tail->info);
+
+            }
+            else
+            {
+            temp=head;
+            while(temp!=0)
+            {
+            printf("%d ",temp->info);
+            temp=temp->next;
+            }
+            }
+
+            break;
+
+ case 2:    printf("\nThe link list in the descending order\n");
+            if(head==NULL && tail==NULL)
+            printf("The list is empty\n");
+
+            else if(head==tail)
+                printf("The only element in the list is %d",tail->info);
+            else
+            {
+            temp=tail;
+            while(temp!=0)
+            {
+            printf("%d ",temp->info);
+            temp=temp->prev;
+            }
+            }
+            break;
+ case 3:    printf("Enter the value of x : ");
+            scanf("%d",&x);
+            node *p=NULL;
+            p = (node*)malloc(sizeof(node));
+            p->info=x;
+            if(head==NULL && tail==NULL)
+            {
+            head=tail=p;
+            tail->prev=NULL;
+            }
+            else if(head==tail)
+            {
+            if(p->info < tail->info)
+            {
+            p->next=tail;
+            tail->prev=p;
+            head=p;
+            p->prev=NULL;
+            }
+            else
+            {
+            tail->next=p;
+            p->prev=tail;
+            tail=p;
+            }
+            }
+            else
+            {
+            temp=head;
+            while(temp!=NULL)
+            {
+            if(temp->info > p->info)
+            {`
+            (temp->prev)->next=p;
+            p->prev=temp->prev;
+            p->next=temp;
+            temp->prev=p;
+            temp=temp->next;
+            }
+            else
+            {
+            temp=temp->next;
+            if(temp==tail)
+            {
+            temp->next=p;
+            p->prev=temp;
+            tail=p;
+            tail->next=NULL;
+            temp=temp->next;
+            }
+
+            }
+
+            }
+            }
+            tail->next=NULL;
+            break;
+
+}
+/*if(ch==0)
+{
+break;
+}
+else
+    continue;*/
+}
+
+}
+
+

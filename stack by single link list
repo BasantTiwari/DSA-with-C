@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node 
+{
+    int info;
+    struct node *next;
+}node;
+node* top=NULL;
+node * push(node *top,int x)
+{
+   
+    node *p=NULL;
+    p=(node*)malloc(sizeof(node));
+    p->info=x;
+    if(top==NULL)
+    {
+    p->next=NULL;
+    }
+    else
+    {
+        p->next=top;
+    }
+    top=p;
+    printf("Node is inserted succesfully\n");
+    return(top);
+}
+node* pop(node *top)
+{
+                
+    printf("The removed element is %d\n",top->info);
+    node *temp=0;
+    temp=top;
+    top=top->next;
+    free(temp);
+    
+    return(top);
+}
+void display(node *top)
+{
+    while(top!=0)
+    {
+        printf("%d ",top->info);
+        top=top->next;
+    }
+}
+int main()
+{
+    
+    int ch,x;
+    while(ch)
+    {
+        printf("Want to push : (press 1)\n");
+        printf("Want to pop : (press 2)\n");
+        printf("Want to display: (press 3)\n");
+        printf("Want to exit: (press 0)\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: 
+                    printf("Enter the element you want to insert\n");
+                    scanf("%d",&x);
+                    top=push(top,x);
+                    break;
+            case 2: if(top==NULL)
+            printf("stack is empty\n");
+            else
+            top=pop(top);
+                    
+                    break;
+            case 3: if(top==NULL)
+                    {
+                      printf("stack is empty\n");
+                    }
+                    else
+                    display(top);
+                    printf("\n");
+                    break;
+        }
+    }
+    
+}

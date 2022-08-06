@@ -1,0 +1,116 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+struct node*left;
+int info;
+struct node*right;
+}node;
+
+void create(node**,int);
+void preorder(node*);
+void inorder(node*);
+void postorder(node*);
+void countnodes(node*,int*);
+
+void main()
+{
+int x,ch,count=0;
+node* root=NULL;
+while(ch!=0)
+{
+printf("\nTo create node: press 1\n");
+printf("To display in the pre-order: press 2\n");
+printf("To display in the in-order : press 3\n");
+printf("To display in the post-order: press 4\n");
+printf("To count the total nodes : press 5\n");
+printf("To exit: press 0\n");
+scanf("%d",&ch);
+
+switch(ch)
+{
+case 1:printf("Enter the element\n");
+       scanf("%d",&x);
+       create(&root,x);
+       break;
+case 2: preorder(root);
+        break;
+case 3: inorder(root);
+        break;
+case 4: postorder(root);
+        break;
+case 5: //int counnt;
+        countnodes(root,&count);
+        printf("the total number of nodes are %d",count);
+        break;
+}
+}
+}
+void create(node**root,int x)
+{
+node* p=NULL;
+p=(node*)malloc(sizeof(node));
+if(*root==NULL)
+{
+p->info=x;
+p->left=p->right=NULL;
+(*root)=p;
+return;
+}
+else if((*root)->info>x)
+create(&(*root)->left,x);
+else
+create(&(*root)->right,x);
+
+}
+//to display in the preorder form:
+void preorder(node* root)
+{
+if(root==NULL)
+return;
+printf("%d ",root->info);
+preorder(root->left);
+preorder(root->right);
+}
+
+//to print the tree in inorder form:
+
+void inorder(node * root)
+{
+if(root==NULL)
+return;
+inorder(root->left);
+printf("%d ",root->info);
+inorder(root->right);
+}
+
+//to print the tree in postorder form:
+
+void postorder(node * root)
+{
+if(root==NULL)
+return;
+postorder(root->left);
+postorder(root->right);
+printf("%d ",root->info);
+
+}
+
+//to count the total numeber of nodes
+
+void countnodes(node* root,int *count)
+{
+    //int count=0;
+    if(root==NULL)
+        return;
+        //printf("there is no element\n");
+     else
+     {
+    (*count)++;
+    countnodes(root->left,count);
+    countnodes(root->right,count);
+    //return count;
+     }
+
+
+}

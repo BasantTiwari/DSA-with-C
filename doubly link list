@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+struct node *prev;
+int info;
+struct node *next;
+}node;
+int main()
+{
+int x,ch;
+node *head=NULL,*temp=NULL,*p;
+while(ch!=0)
+{
+printf("Enter the value: ");
+scanf("%d",&x);
+p=(node*)malloc(sizeof(node));
+p->info=x;
+if(head==NULL && temp=NULL)
+{
+head=temp=p;
+temp->prev=NULL;
+}
+else
+{
+p=(node*)malloc(sizeof(node));
+//p->info=x;
+temp->next=p;
+p->prev=temp;
+temp=p;
+}
+temp->next=NULL;
+
+
+printf("Print the Doubly link list in left to right: press 1\n");
+printf("Print the Doubly link list in right to left: press 2\n");
+printf("press 0 to exit");
+scanf("%d",&ch);
+
+switch(ch)
+{
+case 1:temp=head;
+       while(temp!=0)
+       {
+       printf("%d ".temp->info);
+       temp=temp->next;
+       }break;
+
+case 2:
+       while(temp!=0)
+       {
+       printf("%d ".temp->info);
+       temp=temp->prev;
+       }
+
+}
+}
+}
+
+

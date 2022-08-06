@@ -1,0 +1,153 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+struct node *prev;
+int info;
+struct node *next;
+}node;
+void insertright(node **,node **,int);
+void insertleft(node**,node**,int);
+void deleteleft(node**,node**);
+void deleteright(node**,node**);
+void  display(node*);
+int main()
+{
+int x,ch;
+node *head=NULL,*tail=NULL,*p;
+while(1)
+{
+printf("\nTo add node from right side: Press 1\n");
+printf("To add node from left side: Press 2\n");
+printf("To delete the node from left side: Press 3\n");
+printf("To delete the node from right side: Press 4\n");
+printf("To display the node: press 5\n");
+printf("To Exit: Press 0\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1: printf("Enter the elements\n");
+        scanf("%d",&x);
+        tail=insertright(&head,&tail,&x);
+        if(head==NULL)
+        {
+
+        head=tail;
+        }
+        break;
+case 2: printf("Enter the elements\n");
+        scanf("%d",&x);
+        head=insertleft(&head,&tail,&x);
+        break;
+case 3: head=deleteleft(&head,&tail);
+        break;
+case 4: tail=deleteright(&head,&tail);
+        break;
+case 5: display(&head);
+        break;
+}
+}
+}
+void insertright(node** head,node**tail,int x)
+{
+node *p;
+p=(node*)malloc(sizeof(node));
+p->info=x;
+
+if(*head==NULL)
+{
+*head=*tail=p;
+(*tail)->next=*head;
+(*tail)->prev=*head;
+}
+else
+{
+*tail->next=p;
+p->prev=*tail;
+*tail=p;
+*tail->next=*head;
+*head->prev=*tail;
+}
+//return tail;
+
+}
+void insertleft(node** head,node**tail,int x)
+{
+    node *p;
+    p=(node*)malloc(sizeof(node));
+    p->info=x;
+    if(*head==NULL)
+    {
+    *head=*tail=p;
+    *tail->next=*head;
+    *tail->prev=*head;
+    }
+    else
+    {
+        p->next=head;
+        *head->prev=p;
+        *head=p;
+        *head->prev=*tail;
+        *tail->next=*head;
+
+    }
+    //return head;
+
+}
+void deleteleft(node**head,node** tail)
+{
+    node * temp;
+    temp=*head;
+    if(*head==NULL)
+    {
+
+        printf("List is empty...Nothing to delete\n");
+    }
+    else
+    {
+
+        *head=(*head)->next;
+        (*head)->prev=*tail;
+        (*tail)->next=*head;
+        printf("The deleted element is %d\n",temp->info);
+        free(temp);
+
+    }
+   // return head;
+
+}
+void deleteright(node** head,node** tail)
+{
+    node *temp;
+    if(*head==NULL)
+    {
+        printf("List is empty..Nothing to delete\n");
+
+    }
+    else
+    {
+        temp=*tail;
+        ((*tail)->prev)->next=*head;
+        *tail=((*tail)->prev);
+        (*head)->prev=*tail;
+        printf("the deleted element is %d\n",temp->info);
+        free(temp);
+
+
+
+    }
+    //return tail;
+
+}
+void display(node *head)
+{
+    node *temp;
+    temp=head;
+    do
+    {
+        printf("%d ",temp->info);
+        temp=temp->next;
+    }
+    while(temp!=*head);
+
+}
